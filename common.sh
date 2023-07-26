@@ -43,19 +43,19 @@ func_systemd
 
 func_java(){
   log=/tmp/roboshop.log
-  echo "\e[32m>>>>>>>>>>>>>>>> download ${component} application service >>>>>>>>>>>>>>>> \e[0m"
+  echo -e "\e[32m>>>>>>>>>>>>>>>> download ${component} application service >>>>>>>>>>>>>>>> \e[0m"
   cp ${component}.service /etc/systemd/system/${component}.service &>>${log}
-  echo "\e[32m>>>>>>>>>>>>>>>> Install maven package >>>>>>>>>>>>>>>> \e[0m"
+  echo -e "\e[32m>>>>>>>>>>>>>>>> Install maven package >>>>>>>>>>>>>>>> \e[0m"
   yum install maven -y &>>${log}
   func_prerequisite
-  echo "\e[32m>>>>>>>>>>>>>>>> download dependencies >>>>>>>>>>>>>>>> \e[0m"
+  echo -e "\e[32m>>>>>>>>>>>>>>>> download dependencies >>>>>>>>>>>>>>>> \e[0m"
   mvn clean package &>>${log}
 
   mv target/${component}-1.0.jar ${component}.jar &>>${log}
-  echo "\e[32m>>>>>>>>>>>>>>>> install mysql>>>>>>>>>>>>>>>> \e[0m"
+  echo -e "\e[32m>>>>>>>>>>>>>>>> install mysql>>>>>>>>>>>>>>>> \e[0m"
   yum install mysql -y &>>${log}
-  echo "\e[32m>>>>>>>>>>>>>>>> Load schema >>>>>>>>>>>>>>>> \e[0m"
+  echo -e"\e[32m>>>>>>>>>>>>>>>> Load schema >>>>>>>>>>>>>>>> \e[0m"
   mysql -h mysql.jdevops74.online -uroot -pRoboShop@1 < /app/schema/${component}.sql &>>${log}
-  echo "\e[32m>>>>>>>>>>>>>>>> load service>>>>>>>>>>>>>>>> \e[0m"
+  echo -e"\e[32m>>>>>>>>>>>>>>>> load service>>>>>>>>>>>>>>>> \e[0m"
   func_systemd
 }
