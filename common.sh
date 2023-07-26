@@ -64,6 +64,7 @@ log=\tmp\roboshop.log
 cp ${component}.service /etc/systemd/system/${component}.service &>>${log}
 yum install python36 gcc python3-devel -y &>>${log}
 func_prerequisite
+echo -e "\e[32m <<<<<<<<<<<< install python dependencies >>>>>>>>>>>>>\e[0m"
 pip3.6 install -r requirements.txt &>>${log}
 func_systemd
 }
