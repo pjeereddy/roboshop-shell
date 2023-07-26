@@ -1,6 +1,6 @@
 func_nodejs(){
 log=/tmp/roboshop.log
-echo -e '\e[32m<<<<<<<<<<<<<<<<< create ${component} service >>>>>>>>>>>>>>>>>>>>>\e[0m' | tee -a ${log}
+echo -e "\e[32m<<<<<<<<<<<<<<<<< create ${component} service >>>>>>>>>>>>>>>>>>>>>\e[0m" | tee -a ${log}
 cp ${component}.service /etc/systemd/system/${component}.service &>>${log}
 echo -e '\e[32m<<<<<<<<<<<<<<<<< create mongodb repo >>>>>>>>>>>>>>>>>>>\e[0m' | tee -a ${log}
 cp mongo.repo /etc/yum.repos.d/mongo.repo &>>${log}
