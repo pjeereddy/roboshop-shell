@@ -1,15 +1,15 @@
 func_prerequisite(){
- echo "\e[32m>>>>>>>>>>>>>>>> add user>>>>>>>>>>>>>>>> \e[0m"
+ echo -e "\e[32m>>>>>>>>>>>>>>>> add user>>>>>>>>>>>>>>>> \e[0m"
    useradd roboshop &>>${log}
-   echo "\e[32m>>>>>>>>>>>>>>>> cleanup old directory >>>>>>>>>>>>>>>> \e[0m"
+   echo -e "\e[32m>>>>>>>>>>>>>>>> cleanup old directory >>>>>>>>>>>>>>>> \e[0m"
    rm -rf /app &>>${log}
-   echo "\e[32m>>>>>>>>>>>>>>>> create new directory >>>>>>>>>>>>>>>> \e[0m"
+   echo -e "\e[32m>>>>>>>>>>>>>>>> create new directory >>>>>>>>>>>>>>>> \e[0m"
    mkdir /app &>>${log}
-   echo "\e[32m>>>>>>>>>>>>>>>> download application content >>>>>>>>>>>>>>>> \e[0m"
+   echo -e "\e[32m>>>>>>>>>>>>>>>> download application content >>>>>>>>>>>>>>>> \e[0m"
    curl -L -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>${log}
 
    cd /app &>>${log}
-   echo "\e[32m>>>>>>>>>>>>>>>> unzip application content >>>>>>>>>>>>>>>> \e[0m"
+   echo -e "\e[32m>>>>>>>>>>>>>>>> unzip application content >>>>>>>>>>>>>>>> \e[0m"
    unzip /tmp/${component}.zip &>>${log}
 
    cd /app &>>${log}
