@@ -55,7 +55,7 @@ func_java(){
   echo -e "\e[32m>>>>>>>>>>>>>>>> install mysql>>>>>>>>>>>>>>>> \e[0m"
   yum install mysql -y &>>${log}
   echo -e"\e[32m>>>>>>>>>>>>>>>> Load schema >>>>>>>>>>>>>>>> \e[0m"
-  mysql -h mysql.jdevops74.online -uroot -pRoboShop@1 < /app/schema/${component}.sql &>>${log}
+  mysql -h mysql.jdevops74.online -uroot -pRoboShop@1 </app/schema/${component}.sql &>>${log}
   echo -e"\e[32m>>>>>>>>>>>>>>>> load service>>>>>>>>>>>>>>>> \e[0m"
   func_systemd
 }
