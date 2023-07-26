@@ -70,8 +70,10 @@ func_systemd
 }
 fun_dispatch(){
   log=/tmp/roboshop.log
+  echo -e "\e[32m <<<<<<<<<< Install golang >>>>>>>>>>>\e[0m"
   yum install golang -y &>>${log}
   func_prerequisite
+  echo -e "\e[32m <<<<<<<<<< download dependencies >>>>>>>>>>>\e[0m"
   go mod init ${component} &>>${log}
   go get &>>${log}
   go build &>>${log}
