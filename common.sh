@@ -59,3 +59,11 @@ func_java(){
   echo -e "\e[32m>>>>>>>>>>>>>>>> load service>>>>>>>>>>>>>>>> \e[0m"
   func_systemd
 }
+func_payment(){
+log=\tmp\roboshop.log
+cp ${component}.service /etc/systemd/system/${component}.service &>>${log}
+yum install python36 gcc python3-devel -y &>>${log}
+func_prerequisite
+pip3.6 install -r requirements.txt &>>${log}
+func_systemd
+}
