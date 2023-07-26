@@ -60,11 +60,20 @@ func_java(){
   func_systemd
 }
 func_payment(){
-log=\tmp\roboshop.log
+log=/tmp/roboshop.log
 cp ${component}.service /etc/systemd/system/${component}.service &>>${log}
 yum install python36 gcc python3-devel -y &>>${log}
 func_prerequisite
 echo -e "\e[32m <<<<<<<<<<<< install python dependencies >>>>>>>>>>>>>\e[0m"
 pip3.6 install -r requirements.txt &>>${log}
 func_systemd
+}
+fun_dispatch(){
+  log=/tmp/roboshop.log
+  yum install golang -y &>>${log}
+  func_prerequisite
+  go mod init ${component} &>>${log}
+  go get &>>${log}
+  go build &>>${log}
+ func_systemd
 }
