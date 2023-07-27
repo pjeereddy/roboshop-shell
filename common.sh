@@ -46,6 +46,7 @@ echo -e '\e[32m<<<<<<<<<<<<<<<<< download nodejs setup >>>>>>>>>>>>>>>>>>\e[0m' 
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${log}
 echo -e '\e[32m<<<<<<<<<<<<<<<<<< install nodejs repos >>>>>>>>>>>>>>>>>>>>>>>\e[0m' | tee -a ${log}
 yum install nodejs -y &>>${log}
+echo $?
 func_prerequisite
 echo -e '\e[32m<<<<<<<<<<<< install dependencies >>>>>>>>>>>>>>>>\e[0m' | tee -a ${log}
 npm install &>>${log}
