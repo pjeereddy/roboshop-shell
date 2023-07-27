@@ -66,7 +66,7 @@ func_java(){
   func_prerequisite
   echo -e "\e[32m>>>>>>>>>>>>>>>> download dependencies >>>>>>>>>>>>>>>> \e[0m"  | tee -a &>>/tmp/roboshop.log
   mvn clean package &>>${log}
-
+echo $?
   mv target/${component}-1.0.jar ${component}.jar &>>${log}
   func_schema_setup
   echo -e "\e[32m>>>>>>>>>>>>>>>> load service>>>>>>>>>>>>>>>> \e[0m"
