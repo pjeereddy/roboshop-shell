@@ -14,11 +14,28 @@ func_prerequisite(){
 
    cd /app &>>${log}
 }
+func_schema_setup(){
+ if [ "${schema_type}" == "mongodb" ]; then
+echo -e '\e[32m<<<<<<<<<<< install mongodb shell repos >>>>>>>>>>>\e[0m' | tee -a ${log}
+yum install mongodb-org-shell -y &>>${log}
+echo -e '\e[32m<<<<<<<<<<<< load schema >>>>>>>>>>>>>>>>>\e[0m' | tee -a ${log}
+mongo --host mongodb.jdevops74.online </app/schema/${component}.js &>>${log}
+fi
+
+if [ "${schema_type}" == "mysql" ]; then
+echo -e "\e[32m>>>>>>>>>>>>>>>> install mysql>>>>>>>>>>>>>>>> \e[0m"  | tee -a &>>/tmp/roboshop.log
+  yum install mysql -y &>>${log}
+  echo -e "\e[32m>>>>>>>>>>>>>>>> Load schema >>>>>>>>>>>>>>>> \e[0m"  | tee -a &>>/tmp/roboshop.log
+  mysql -h mysql.jdevops74.online -uroot -pRoboShop@1 </app/schema/${component}.sql &>>${log}
+  fi
+}
+
 func_systemd(){
   systemctl daemon-reload &>>${log}
   systemctl enable ${component} &>>${log}
   systemctl restart ${component} &>>${log}
 }
+
 func_nodejs(){
 log=/tmp/roboshop.log
 echo -e "\e[32m<<<<<<<<<<<<<<<<< create ${component} service >>>>>>>>>>>>>>>>>>>>>\e[0m" | tee -a ${log}
@@ -32,10 +49,8 @@ yum install nodejs -y &>>${log}
 func_prerequisite
 echo -e '\e[32m<<<<<<<<<<<< install dependencies >>>>>>>>>>>>>>>>\e[0m' | tee -a ${log}
 npm install &>>${log}
-echo -e '\e[32m<<<<<<<<<<< install mongodb shell repos >>>>>>>>>>>\e[0m' | tee -a ${log}
-yum install mongodb-org-shell -y &>>${log}
-echo -e '\e[32m<<<<<<<<<<<< load schema >>>>>>>>>>>>>>>>>\e[0m' | tee -a ${log}
-mongo --host mongodb.jdevops74.online </app/schema/${component}.js &>>${log}
+func_schema_setup
+
 echo -e '\e[32m<<<<<<<<<<<<<start service >>>>>>>>>>>>>>>\e[0m' | tee -a ${log}
 func_systemd
 }
@@ -52,12 +67,23 @@ func_java(){
   mvn clean package &>>${log}
 
   mv target/${component}-1.0.jar ${component}.jar &>>${log}
-  echo -e "\e[32m>>>>>>>>>>>>>>>> install mysql>>>>>>>>>>>>>>>> \e[0m"  | tee -a &>>/tmp/roboshop.log
-  yum install mysql -y &>>${log}
-  echo -e "\e[32m>>>>>>>>>>>>>>>> Load schema >>>>>>>>>>>>>>>> \e[0m"  | tee -a &>>/tmp/roboshop.log
-  mysql -h mysql.jdevops74.online -uroot -pRoboShop@1 </app/schema/${component}.sql &>>${log}
+  func_schema_setup
   echo -e "\e[32m>>>>>>>>>>>>>>>> load service>>>>>>>>>>>>>>>> \e[0m"
   func_systemd
+}
+func_nodejs(){
+log=/tmp/roboshop.log
+echo -e "\e[32m <<<<<<<<<<<<<< Download ${component} application service <<<<<<<<<<<<\e[0m" | tee -a &>>${log}
+cp ${component}.service /etc/systemd/system/${component}.service &>>$log
+echo -e "\e[32m <<<<<<<<<<<<< Download nodejs setup file >>>>>>>>>>>>> \e[0m"
+curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>$log
+echo -e "\e[32m <<<<<<<<<<<<< Install nodejs >>>>>>>>>>>\e[0m"
+yum install nodejs -y &>>$log
+func_prerequisites &>>$log
+echo -e "\e[32m <<<<<<<<<<install dependencies >>>>>>>>>>>>>\e[0m"
+npm install &>>$log
+echo -e "\e[32m <<<<<<<<<<<<<< start service >>>>>>>>>>>\e[0m"
+func_systemd &>>$log
 }
 func_payment(){
 log=/tmp/roboshop.log
