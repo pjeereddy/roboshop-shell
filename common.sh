@@ -71,7 +71,7 @@ func_java(){
   echo -e "\e[32m>>>>>>>>>>>>>>>> load service>>>>>>>>>>>>>>>> \e[0m"
   func_systemd
 }
-func_nodejs(){
+func_node(){
 log=/tmp/roboshop.log
 echo -e "\e[32m <<<<<<<<<<<<<< Download ${component} application service <<<<<<<<<<<<\e[0m" | tee -a &>>${log}
 cp ${component}.service /etc/systemd/system/${component}.service &>>$log
