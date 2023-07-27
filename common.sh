@@ -82,6 +82,7 @@ yum install nodejs -y &>>$log
 func_prerequisites &>>$log
 echo -e "\e[32m <<<<<<<<<<install dependencies >>>>>>>>>>>>>\e[0m"
 npm install &>>$log
+echo $?
 echo -e "\e[32m <<<<<<<<<<<<<< start service >>>>>>>>>>>\e[0m"
 func_systemd &>>$log
 }
