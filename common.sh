@@ -155,8 +155,10 @@ func_go(){
   echo -e "\e[32m <<<<<<<<<< download dependencies >>>>>>>>>>>\e[0m"
   go mod init ${component} &>>${log}
   func_exit
+  echo -e "\e[32m <<<<<<<<<< get files >>>>>>>>>>>\e[0m"
   go get &>>${log}
   func_exit
+  echo -e "\e[32m <<<<<<<<<< build files >>>>>>>>>>>\e[0m"
   go build &>>${log}
   func_exit
   echo -e "\e[32m <<<<<<<<<<< start service >>>>>>>>>>>>> \e[0m"
