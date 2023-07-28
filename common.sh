@@ -145,7 +145,7 @@ func_exit
 func_systemd
 func_exit
 }
-fun_dispatch(){
+func_go(){
   log=/tmp/roboshop.log
   echo -e "\e[32m <<<<<<<<<< Install golang >>>>>>>>>>>\e[0m"
   yum install golang -y &>>${log}

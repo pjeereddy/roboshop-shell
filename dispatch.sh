@@ -1,3 +1,3 @@
 component=dispatch
 source common.sh
-fun_dispatch
+func_go
