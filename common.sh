@@ -2,7 +2,7 @@ func_exit(){
   if [ "$?" -eq "0" ]; then
   echo -e "\e[32m <<<<<<<<<<< success >>>>>>>>>> \e[0m"
  else
-   echo -e "\e[32m <<<<<<<<<<< failure >>>>>>>>>> \e[0m"
+   echo -e "\e[31m <<<<<<<<<<< failure >>>>>>>>>> \e[0m"
    fi
 }
 func_prerequisite(){
@@ -51,11 +51,11 @@ echo -e "\e[32m>>>>>>>>>>>>>>>> install mysql>>>>>>>>>>>>>>>> \e[0m"  | tee -a &
 func_systemd(){
 
   systemctl daemon-reload &>>${log}
-  func_exit
+
   systemctl enable ${component} &>>${log}
-  func_exit
+
   systemctl restart ${component} &>>${log}
-  func_exit
+
 }
 
 func_nodejs(){
