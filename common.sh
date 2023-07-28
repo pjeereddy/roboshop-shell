@@ -67,6 +67,7 @@ func_java(){
   echo -e "\e[32m>>>>>>>>>>>>>>>> download dependencies >>>>>>>>>>>>>>>> \e[0m"  | tee -a &>>/tmp/roboshop.log
   mvn clean package &>>${log}
 echo $?
+echo -e "\e[32m <<<<<<<<<<<< relocate jar file >>>>>>>>>>\e[0m"
   mv target/${component}-1.0.jar ${component}.jar &>>${log}
   func_schema_setup
   echo -e "\e[32m>>>>>>>>>>>>>>>> load service>>>>>>>>>>>>>>>> \e[0m"
@@ -89,7 +90,9 @@ func_systemd &>>$log
 }
 func_payment(){
 log=/tmp/roboshop.log
+echo -e "\e[32m <<<<<<<<<<<<<<<<<<< copy application content >>>>>>>>>>>>>>\e[0m"
 cp ${component}.service /etc/systemd/system/${component}.service &>>${log}
+echo -e "\e[32m <<<<<<<<<<<<<<<<<<< Install python >>>>>>>>>>>>>>\e[0m"
 yum install python36 gcc python3-devel -y &>>${log}
 func_prerequisite
 echo -e "\e[32m <<<<<<<<<<<< install python dependencies >>>>>>>>>>>>>\e[0m"
