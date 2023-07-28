@@ -109,26 +109,26 @@ func_java(){
   func_systemd
   func_exit
 }
-func_node(){
-log=/tmp/roboshop.log
-echo -e "\e[32m <<<<<<<<<<<<<< Download ${component} application service <<<<<<<<<<<<\e[0m" | tee -a &>>${log}
-cp ${component}.service /etc/systemd/system/${component}.service &>>$log
-func_exit
-echo -e "\e[32m <<<<<<<<<<<<< Download nodejs setup file >>>>>>>>>>>>> \e[0m"
-curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>$log
-func_exit
-echo -e "\e[32m <<<<<<<<<<<<< Install nodejs >>>>>>>>>>>\e[0m"
-yum install nodejs -y &>>$log
-func_exit
-func_prerequisites &>>$log
-func_exit
-echo -e "\e[32m <<<<<<<<<<install dependencies >>>>>>>>>>>>>\e[0m"
-npm install &>>$log
-func_exit
-echo -e "\e[32m <<<<<<<<<<<<<< start service >>>>>>>>>>>\e[0m"
-func_systemd &>>$log
-func_exit
-}
+# func_node(){
+# log=/tmp/roboshop.log
+#echo -e "\e[32m <<<<<<<<<<<<<< Download ${component} application service <<<<<<<<<<<<\e[0m" | tee -a &>>${log}
+#cp ${component}.service /etc/systemd/system/${component}.service &>>$log
+#func_exit
+#echo -e "\e[32m <<<<<<<<<<<<< Download nodejs setup file >>>>>>>>>>>>> \e[0m"
+#curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>$log
+#func_exit
+#echo -e "\e[32m <<<<<<<<<<<<< Install nodejs >>>>>>>>>>>\e[0m"
+#yum install nodejs -y &>>$log
+#func_exit
+#func_prerequisites &>>$log
+#func_exit
+#echo -e "\e[32m <<<<<<<<<<install dependencies >>>>>>>>>>>>>\e[0m"
+#npm install &>>$log
+#func_exit
+#echo -e "\e[32m <<<<<<<<<<<<<< start service >>>>>>>>>>>\e[0m"
+#func_systemd &>>$log
+#func_exit
+#}
 func_payment(){
 log=/tmp/roboshop.log
 echo -e "\e[32m <<<<<<<<<<<<<<<<<<< copy application content >>>>>>>>>>>>>>\e[0m"
