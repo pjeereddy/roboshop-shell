@@ -1,5 +1,9 @@
 func_exit(){
-  echo $?
+  if [ "$?" -eq "0" ]; then
+  echo -e "\e[32m <<<<<<<<<<< success >>>>>>>>>> \e[0m"
+ else
+   echo -e "\e[32m <<<<<<<<<<< failure >>>>>>>>>> \e[0m"
+   fi
 }
 func_prerequisite(){
  echo -e "\e[32m>>>>>>>>>>>>>>>> add user>>>>>>>>>>>>>>>> \e[0m"
@@ -152,7 +156,7 @@ fun_dispatch(){
   func_exit
   go build &>>${log}
   func_exit
-  echo - "\e[32m <<<<<<<<<<< start service >>>>>>>>>>>>> \e[0m"
+  echo -e "\e[32m <<<<<<<<<<< start service >>>>>>>>>>>>> \e[0m"
  func_systemd
  func_exit
 }
