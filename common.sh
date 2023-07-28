@@ -53,11 +53,11 @@ echo -e "\e[32m>>>>>>>>>>>>>>>> install mysql>>>>>>>>>>>>>>>> \e[0m"  | tee -a &
 
 func_systemd(){
 
-  systemctl daemon-reload &>>${log} | tee -a
+  systemctl daemon-reload &>>${log}
 
-  systemctl enable ${component} &>>${log} | tee -a
+  systemctl enable ${component} &>>${log}
 
-  systemctl restart ${component} &>>${log} | tee -a
+  systemctl restart ${component} &>>${log}
 
 }
 
