@@ -7,7 +7,10 @@ func_exit(){
 }
 func_prerequisite(){
  echo -e "\e[32m>>>>>>>>>>>>>>>> add user>>>>>>>>>>>>>>>> \e[0m"
+   id=roboshop
+   if [ $? -eq 0 ]; then
    useradd roboshop &>>${log}
+   fi
    func_exit
    echo -e "\e[32m>>>>>>>>>>>>>>>> cleanup old directory >>>>>>>>>>>>>>>> \e[0m"
    func_exit
