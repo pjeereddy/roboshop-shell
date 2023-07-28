@@ -8,7 +8,7 @@ func_exit(){
 func_prerequisite(){
  echo -e "\e[32m>>>>>>>>>>>>>>>> add user>>>>>>>>>>>>>>>> \e[0m"
    id roboshop &>>${log}
-   if [ $? -eq 0 ]; then
+   if [ "$?" -eq "0" ]; then
    useradd roboshop &>>${log}
    fi
    func_exit
@@ -53,11 +53,11 @@ echo -e "\e[32m>>>>>>>>>>>>>>>> install mysql>>>>>>>>>>>>>>>> \e[0m"  | tee -a &
 
 func_systemd(){
 
-  systemctl daemon-reload &>>${log}
+  systemctl daemon-reload &>>${log} | tee -a
 
-  systemctl enable ${component} &>>${log}
+  systemctl enable ${component} &>>${log} | tee -a
 
-  systemctl restart ${component} &>>${log}
+  systemctl restart ${component} &>>${log} | tee -a
 
 }
 
