@@ -8,7 +8,7 @@ func_exit(){
 func_prerequisite(){
  echo -e "\e[32m>>>>>>>>>>>>>>>> add user>>>>>>>>>>>>>>>> \e[0m"
    id roboshop &>>${log}
-   if [ "$?" -eq "0" ]; then
+   if [ $? -ne 0 ]; then
    useradd roboshop &>>${log}
    fi
    func_exit
